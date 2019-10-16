@@ -1,0 +1,100 @@
+<div id="invoice">
+    <div class="row no-print">
+        <div class="col-md-auto" style="display: flex; align-items: center;">
+            Select Order
+        </div>
+        <div class="col-3">
+            <select class="form-control" (change)="onChange($event.target.value)">
+                <option>Select Order</option>
+                <option *ngFor='let order of orderList ' [value]="order.id">{{order?.invoiceNumber }} -
+                    {{order?.invoiceDate | date :'MM/dd/yyyy hh:mm'}}</option>
+
+            </select>
+        </div>
+        <div class="col">
+            <button class="float-right" [useExistingCss]="true" printSectionId="invoice" ngxPrint>PRINT</button>
+
+        </div>
+
+    </div>
+    <hr>
+    <div id="printarea" class="invoice overflow-auto">
+        <div>
+            <main>
+                <div class="row contacts">
+                    <div class="col invoice-to">
+                        <div class="text-gray-light">INVOICE TO:</div>
+                        <h2 class="to">{{order?.invoiceTo}}</h2>
+                        <div class="address">796 Silver Harbour, TX 79273, US</div>
+                        <div class="email"><a href="mailto:john@example.com">john@example.com</a></div>
+                    </div>
+                    <div class="col invoice-details">
+                        <h1 class="invoice-id">Invoice Number:{{order?.invoiceNumber}}</h1>
+                        <div class="date">Date of Invoice: {{order?.invoiceDate | date :'MM/dd/yyyy'}}</div>
+                        <div *ngIf="order?.dueDate" class="date">Due Date: {{order?.dueDate | date :'MM/dd/yyyy'}}</div>
+
+                    </div>
+                </div>
+                <table>
+                    <thead style="font-weight: bold">
+                        <tr>
+                            <th>Line No.</th>
+                            <th class="text-left">DESCRIPTION</th>
+                            <th class="text-right">QUANTITY</th>
+
+                            <th class="text-right">PRICE</th>
+                            <th class="text-right">BASIC SALES TAX</th>
+                            <th class="text-right">IMPORT DUTY TAX</th>
+
+
+                            <th class="text-right">TAX</th>
+                            <th class="text-right">TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of order?.cartItimes ; let i = index">
+                            <td class="no">{{i +1}}</td>
+                            <td class="text-left">
+                                <h3>
+                                    {{item?.product.name}}
+                                </h3>
+
+                            </td>
+                            <td class="qty">{{item.quantity}}</td>
+
+                            <td class="unit">${{item?.product.price | number : '1.2-2'}}</td>
+                            <td class="qty">{{item?.salesTaxPer | number : '1.2-2'}}%</td>
+                            <td class="qty">{{item?.importTaxPer | number : '1.2-2'}}%</td>
+                            <td class="qty">${{item?.salesTax | number : '1.2-2'}}</td>
+
+                            <td class="total">${{item.priceWithTax | number : '1.2-2'}}</td>
+                        </tr>
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5"></td>
+                            <td colspan="2">Sub total </td>
+                            <td>${{order?.subTotal | number : '1.2-2'}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5"></td>
+                            <td colspan="2">Tax subtotal </td>
+                            <td>${{order?.salesTax | number : '1.2-2'}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5"></td>
+                            <td colspan="2">GRAND TOTAL</td>
+                            <td>${{order?.orderTotal | number : '1.2-2'}}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </main>
+
+        </div>
+        <div></div>
+    </div>
+</div>
+<div>
+</div>
