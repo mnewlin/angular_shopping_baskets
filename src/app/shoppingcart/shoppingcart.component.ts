@@ -26,7 +26,7 @@ export class ShoppingcartComponent implements OnInit {
   orderTotal: number;
   subTotal: number;
   orderlist: Order[] = [];
-  constructor(private router: Router,private productsevice: ProductService, private notifierService: NotifierService, private orderService: OrderService) {
+  constructor(private router: Router, private productsevice: ProductService, private notifierService: NotifierService, private orderService: OrderService) {
   }
 
   ngOnInit(): void {
@@ -35,7 +35,7 @@ export class ShoppingcartComponent implements OnInit {
 
   }
   ChnageProduct(): void {
-    this.selectedProduct = this.products.find(p => p.id === Number( this.selectedProductId));
+    this.selectedProduct = this.products.find(p => p.id === Number(this.selectedProductId));
     if (this.selectedQty && this.selectedQty > 0) {
       this.selectedPrice = this.selectedQty * this.selectedProduct.price;
     } else {
@@ -51,7 +51,7 @@ export class ShoppingcartComponent implements OnInit {
       this.notifierService.notify("error", "Please enter quantity");
       return;
     }
-    if (this.cartitems.some(p => p.product.id === this.selectedProductId)) {
+    if (this.cartitems.some(p => p.product.id == this.selectedProductId)) {
       this.notifierService.notify("error", "Product already in cart");
       return;
     }
@@ -71,15 +71,18 @@ export class ShoppingcartComponent implements OnInit {
   calculateTax(cartitem: Cart[]): Cart[] {
     // calculate tax based on categories and imports with Constant percentage;
     cartitem.forEach((element: Cart) => {
+      element.salesTax = 0;
       element.totalPrice = Number(element.totalPrice.toFixed(2));
       if (!(this.examptedCategories.includes(element.product.category))) {
-        element.salesTax = +((element.totalPrice * Constants.salesTax) / 100).toFixed(2);
+        //element.salesTax = +(Math.ceil(((element.totalPrice * Constants.salesTax) / 100) * 20 - .05) /20).toFixed(2);
+        element.salesTax = +(this.multipleOfFive(element.totalPrice, Constants.salesTax))
         element.salesTaxPer = Constants.salesTax;
 
 
       }
-      if (element.product.imported) {
-        element.salesTax += +((element.totalPrice * Constants.importDuty) / 100).toFixed(2);
+      if ( element.product.imported) {
+        //element.salesTax += +(Math.ceil(((element.totalPrice * Constants.importDuty) / 100) * 20 - .05) / 20).toFixed(2);
+        element.salesTax += +(this.multipleOfFive (element.totalPrice, Constants.importDuty));
         element.salesTax = +element.salesTax.toFixed(2);
         element.importTaxPer = Constants.importDuty;
       }
@@ -91,6 +94,11 @@ export class ShoppingcartComponent implements OnInit {
     this.orderTotal = +(cartitem.reduce((sum, current) => sum + current.priceWithTax, 0)).toFixed(2);
     return cartitem;
   }
+
+  multipleOfFive(price, tax) {
+    return (Math.ceil(((price * tax) / 100) * 20 - .05) / 20).toFixed(2);
+  }
+
   updateQty(item: Cart, event: any): void {
     let cartItme: Cart = this.cartitems.find(i => i.product.id === item.product.id);
     cartItme.quantity = +event.srcElement.value;
@@ -105,7 +113,7 @@ export class ShoppingcartComponent implements OnInit {
     if (this.cartitems.length > 0) {
       let order: Order = new Order();
       order.invoiceNumber = this.orderlist.length + 1;
-      order.invoiceTo = "Developer";
+      order.invoiceTo = "XYZ Corp";
       order.cartItimes = this.cartitems;
       order.dueDate = this.addDays(new Date(), 10);
       order.invoiceDate = new Date();
@@ -118,7 +126,7 @@ export class ShoppingcartComponent implements OnInit {
         this.salesTax = null;
         this.subTotal = null;
         this.notifierService.notify("success", "Order placed successfully");
-        this.router.navigate(['/orders']);
+        this.router.navigate(['/orders'], { queryParams: { id: d.invoiceNumber } });
       });
     }
 

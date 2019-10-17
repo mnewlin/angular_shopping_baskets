@@ -1,20 +1,19 @@
 <div id="invoice">
     <div class="row no-print">
         <div class="col-md-auto" style="display: flex; align-items: center;">
-            Select Order
+         Select Order
         </div>
         <div class="col-3">
             <select class="form-control" (change)="onChange($event.target.value)">
-                <option>Select Order</option>
-                <option *ngFor='let order of orderList ' [value]="order.id">{{order?.invoiceNumber }} -
-                    {{order?.invoiceDate | date :'MM/dd/yyyy hh:mm'}}</option>
+               <option>Select Order</option>
+               <option *ngFor='let order of orderList ' [value]="order.id">{{order?.invoiceNumber }} - {{order?.invoiceDate | date :'MM/dd/yyyy hh:mm'}}</option>
 
             </select>
         </div>
-        <div class="col">
-            <button class="float-right" [useExistingCss]="true" printSectionId="invoice" ngxPrint>PRINT</button>
+                <div class="col">
+                    <button class="float-right" [useExistingCss]="true" printSectionId="invoice" ngxPrint>PRINT</button>
 
-        </div>
+                </div>
 
     </div>
     <hr>
@@ -52,8 +51,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of order?.cartItimes ; let i = index">
-                            <td class="no">{{i +1}}</td>
+                                               <tr *ngFor="let item of order?.cartItimes ; let i = index">
+                                                       <td class="no">{{i +1}}</td>
                             <td class="text-left">
                                 <h3>
                                     {{item?.product.name}}
@@ -66,7 +65,7 @@
                             <td class="qty">{{item?.salesTaxPer | number : '1.2-2'}}%</td>
                             <td class="qty">{{item?.importTaxPer | number : '1.2-2'}}%</td>
                             <td class="qty">${{item?.salesTax | number : '1.2-2'}}</td>
-
+                          
                             <td class="total">${{item.priceWithTax | number : '1.2-2'}}</td>
                         </tr>
 
