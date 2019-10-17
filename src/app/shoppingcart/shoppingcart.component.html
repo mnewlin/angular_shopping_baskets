@@ -10,10 +10,11 @@
       <div class="col-3">
 
         <label for="inlineFormInput">Select Product</label>
-        <select (change)="ChnageProduct()" class="form-control productSelect" id="exampleFormControlSelect1"
+        <select (change)="ChnageProduct()" aria-placeholder="Select Product" placeholder="Select Product"
+          class="form-control productSelect"
+          id="exampleFormControlSelect1"
           [(ngModel)]="selectedProductId">
 
-          <option>Select Product</option>
           <option *ngFor='let product of products ' [value]="product.id">{{product?.name}}</option>
         </select>
       </div>
@@ -47,6 +48,11 @@
               <th scope="col">Description</th>
               <th scope="col" class="text-center">Quantity</th>
               <th scope="col" class="text-right">Price</th>
+               <th scope="col" class="text-right">Basic sales tax</th>
+               <th scope="col" class="text-right">Import duty tax</th>
+
+
+               <th scope="col" class="text-right">Tax</th>
               <th scope="col" class="text-right">Total Price</th>
               <th> </th>
             </tr>
@@ -58,6 +64,9 @@
               <td><input class="form-control" type="text" [value]="item.quantity" (change)="updateQty(item,$event)" />
               </td>
               <td class="text-right">${{item.totalPrice | number : '1.2-2'}}</td>
+              <td class="text-right">{{item?.salesTaxPer | number : '1.2-2'}}%</td>
+              <td class="text-right">{{item?.importTaxPer | number : '1.2-2'}}%</td>
+              <td class="text-right">${{item?.salesTax | number : '1.2-2'}}</td>
               <td class="text-right">${{item.priceWithTax | number : '1.2-2' }}</td>
               <td class="text-right"><button class="btn btn-sm btn-danger removeproduct" (click)="remove(i)">Remove
                 </button> </td>
@@ -66,6 +75,9 @@
 
             <tr>
               <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
               <td></td>
               <td></td>
               <td></td>
@@ -77,10 +89,16 @@
               <td></td>
               <td></td>
               <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
               <td>Tax</td>
               <td class="text-right">${{salesTax | number : '1.2-2'}}</td>
             </tr>
             <tr>
+              <td></td>
+              <td></td>
+              <td></td>
               <td></td>
               <td></td>
               <td></td>

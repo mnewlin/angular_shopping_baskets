@@ -1,11 +1,11 @@
 <div id="invoice">
     <div class="row no-print">
         <div class="col-md-auto" style="display: flex; align-items: center;">
-         Select Order
+         Select Receipt
         </div>
         <div class="col-3">
             <select class="form-control" (change)="onChange($event.target.value)">
-               <option>Select Order</option>
+               <option>Select Receipt</option>
                <option *ngFor='let order of orderList ' [value]="order.id">{{order?.invoiceNumber }} - {{order?.invoiceDate | date :'MM/dd/yyyy hh:mm'}}</option>
 
             </select>
@@ -17,19 +17,19 @@
 
     </div>
     <hr>
-    <div id="printarea" class="invoice overflow-auto">
+    <div id="printarea" class="invoice overflow-auto" *ngIf="order">
         <div>
             <main>
                 <div class="row contacts">
                     <div class="col invoice-to">
-                        <div class="text-gray-light">INVOICE TO:</div>
+                        <div class="text-gray-light">Receipt TO:</div>
                         <h2 class="to">{{order?.invoiceTo}}</h2>
                         <div class="address">796 Silver Harbour, TX 79273, US</div>
                         <div class="email"><a href="mailto:john@example.com">john@example.com</a></div>
                     </div>
                     <div class="col invoice-details">
-                        <h1 class="invoice-id">Invoice Number:{{order?.invoiceNumber}}</h1>
-                        <div class="date">Date of Invoice: {{order?.invoiceDate | date :'MM/dd/yyyy'}}</div>
+                        <h1 class="invoice-id">Receipt Number:{{order?.invoiceNumber}}</h1>
+                        <div class="date">Date of Receipt: {{order?.invoiceDate | date :'MM/dd/yyyy'}}</div>
                         <div *ngIf="order?.dueDate" class="date">Due Date: {{order?.dueDate | date :'MM/dd/yyyy'}}</div>
 
                     </div>

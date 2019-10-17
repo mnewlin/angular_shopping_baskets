@@ -113,7 +113,7 @@ export class ShoppingcartComponent implements OnInit {
     if (this.cartitems.length > 0) {
       let order: Order = new Order();
       order.invoiceNumber = this.orderlist.length + 1;
-      order.invoiceTo = "XYZ Corp";
+      order.invoiceTo = "John Smith";
       order.cartItimes = this.cartitems;
       order.dueDate = this.addDays(new Date(), 10);
       order.invoiceDate = new Date();
