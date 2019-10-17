@@ -327,19 +327,19 @@
             "category": "candy",
             "imported": false
           },
-          "quantity": 3,
-          "totalPrice": 48,
+          "quantity": 5,
+          "totalPrice": 80,
           "salesTax": 0,
           "salesTaxPer": 0,
           "importTaxPer": 0,
-          "priceWithTax": 48
+          "priceWithTax": 80
         }
       ],
-      "dueDate": "2019-10-27T11:56:15.525Z",
-      "invoiceDate": "2019-10-17T11:56:15.525Z",
-      "orderTotal": 48,
+      "dueDate": "2019-10-27T11:25:17.143Z",
+      "invoiceDate": "2019-10-17T11:25:17.143Z",
+      "orderTotal": 80,
       "salesTax": 0,
-      "subTotal": 48,
+      "subTotal": 80,
       "id": 11
     }
   ],

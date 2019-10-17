@@ -10,7 +10,7 @@
       <div class="col-3">
 
         <label for="inlineFormInput">Select Product</label>
-        <select (change)="ChnageProduct()" class="form-control" id="exampleFormControlSelect1"
+        <select (change)="ChnageProduct()" class="form-control productSelect" id="exampleFormControlSelect1"
           [(ngModel)]="selectedProductId">
 
           <option>Select Product</option>
@@ -20,17 +20,17 @@
       <div class="col-3">
 
         <label for="inlineFormInput">Select Quantity</label>
-        <input class="form-control" (change)="ChnageProduct()" type="number" placeholder="Enter Qty" min="1"
+        <input class="form-control qtyTextbox" (change)="ChnageProduct()" type="number" placeholder="Enter Qty" min="1"
           [(ngModel)]="selectedQty">
       </div>
       <div class="col-3">
 
         <label for="inlineFormInput">Price</label>
         <br />
-        {{selectedPrice  | number : '1.2-2' }}
+      <span class="productprice"> {{selectedPrice  | number : '1.2-2' }}</span>
       </div>
       <div class="col-3" style="display:flex; align-items: center;">
-        <button (click)="addProduct()">Add </button>
+        <button class="addproduct" (click)="addProduct()">Add </button>
       </div>
     </div>
 
@@ -57,9 +57,10 @@
               <td>{{item.product.name}}</td>
               <td><input class="form-control" type="text" [value]="item.quantity" (change)="updateQty(item,$event)" />
               </td>
-              <td class="text-right">${{item.product.price | number : '1.2-2'}}</td>
+              <td class="text-right">${{item.totalPrice | number : '1.2-2'}}</td>
               <td class="text-right">${{item.priceWithTax | number : '1.2-2' }}</td>
-              <td class="text-right"><button class="btn btn-sm btn-danger" (click)="remove(i)">Remove </button> </td>
+              <td class="text-right"><button class="btn btn-sm btn-danger removeproduct" (click)="remove(i)">Remove
+                </button> </td>
             </tr>
 
 
@@ -96,7 +97,7 @@
         <div class="col-sm-12  col-md-6">
         </div>
         <div class="col-sm-12 col-md-6 text-right">
-          <button (click)="addOrder()" class="btn btn-lg btn-block btn-success text-uppercase">Place Order</button>
+          <button (click)="addOrder()" class="btn btn-lg btn-block btn-success text-uppercase ">Place Order</button>
         </div>
       </div>
     </div>
