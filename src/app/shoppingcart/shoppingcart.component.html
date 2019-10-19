@@ -10,7 +10,7 @@
       <div class="col-3">
 
         <label for="inlineFormInput">Select Product</label>
-        <select (change)="ChnageProduct()" aria-placeholder="Select Product" placeholder="Select Product"
+        <select (change)="ChangeProduct()" aria-placeholder="Select Product" placeholder="Select Product"
           class="form-control productSelect"
           id="exampleFormControlSelect1"
           [(ngModel)]="selectedProductId">
@@ -21,15 +21,22 @@
       <div class="col-3">
 
         <label for="inlineFormInput">Select Quantity</label>
-        <input class="form-control qtyTextbox" (change)="ChnageProduct()" type="number" placeholder="Enter Qty" min="1"
+        <input class="form-control qtyTextbox" (change)="ChangeProduct()" type="number" placeholder="Enter Quantity" min="1"
           [(ngModel)]="selectedQty">
       </div>
       <div class="col-3">
 
-        <label for="inlineFormInput">Price</label>
+        <label for="inlineFormInput">Unit Price</label>
+        <br />
+      <span class="productprice"> {{unitPrice  | number : '1.2-2' }}</span>
+      </div>
+      <!-- <div class="col-3">
+
+        <label for="inlineFormInput">Total Price</label>
         <br />
       <span class="productprice"> {{selectedPrice  | number : '1.2-2' }}</span>
-      </div>
+      </div> -->
+
       <div class="col-3" style="display:flex; align-items: center;">
         <button class="addproduct" (click)="addProduct()">Add </button>
       </div>

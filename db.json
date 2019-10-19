@@ -172,7 +172,7 @@
         {
           "product": {
             "id": 3,
-            "name": "bag of microwave Popcorn",
+            "name": "Bag of microwave Popcorn",
             "price": 0.99,
             "category": "popcorn",
             "imported": false
@@ -418,7 +418,7 @@
         {
           "product": {
             "id": 4,
-            "name": "imported bag of Vanilla-Hazelnut Coffee",
+            "name": "Imported bag of Vanilla-Hazelnut Coffee",
             "price": 11,
             "category": "coffee",
             "imported": true
@@ -437,6 +437,87 @@
       "salesTax": 0.55,
       "subTotal": 11,
       "id": 14
+    },
+    {
+      "invoiceNumber": 15,
+      "invoiceTo": "John Smith",
+      "cartItimes": [
+        {
+          "product": {
+            "id": 1,
+            "name": "16lb bag of Skittles",
+            "price": 16,
+            "category": "candy",
+            "imported": false
+          },
+          "quantity": 3,
+          "totalPrice": 48,
+          "salesTax": 0,
+          "salesTaxPer": 0,
+          "importTaxPer": 0,
+          "priceWithTax": 48
+        }
+      ],
+      "dueDate": "2019-10-29T01:34:03.374Z",
+      "invoiceDate": "2019-10-19T01:34:03.374Z",
+      "orderTotal": 48,
+      "salesTax": 0,
+      "subTotal": 48,
+      "id": 15
+    },
+    {
+      "invoiceNumber": 16,
+      "invoiceTo": "John Smith",
+      "cartItimes": [
+        {
+          "product": {
+            "id": 6,
+            "name": "Imported crate of Almond Snickers",
+            "price": 75.99,
+            "category": "candy",
+            "imported": true
+          },
+          "quantity": 2,
+          "totalPrice": 151.98,
+          "salesTax": 7.6,
+          "salesTaxPer": 0,
+          "importTaxPer": 5,
+          "priceWithTax": 159.58
+        }
+      ],
+      "dueDate": "2019-10-29T01:36:24.779Z",
+      "invoiceDate": "2019-10-19T01:36:24.779Z",
+      "orderTotal": 159.58,
+      "salesTax": 7.6,
+      "subTotal": 151.98,
+      "id": 16
+    },
+    {
+      "invoiceNumber": 17,
+      "invoiceTo": "John Smith",
+      "cartItimes": [
+        {
+          "product": {
+            "id": 2,
+            "name": "Walkman",
+            "price": 99.99,
+            "category": "electronic",
+            "imported": false
+          },
+          "quantity": 3,
+          "totalPrice": 299.97,
+          "salesTax": 30,
+          "salesTaxPer": 10,
+          "importTaxPer": 0,
+          "priceWithTax": 329.97
+        }
+      ],
+      "dueDate": "2019-10-29T01:38:16.109Z",
+      "invoiceDate": "2019-10-19T01:38:16.109Z",
+      "orderTotal": 329.97,
+      "salesTax": 30,
+      "subTotal": 299.97,
+      "id": 17
     }
   ],
   "products": [
@@ -456,14 +537,14 @@
     },
     {
       "id": 3,
-      "name": "bag of microwave Popcorn",
+      "name": "Bag of microwave Popcorn",
       "price": 0.99,
       "category": "popcorn",
       "imported": false
     },
     {
       "id": 4,
-      "name": "imported bag of Vanilla-Hazelnut Coffee",
+      "name": "Imported bag of Vanilla-Hazelnut Coffee",
       "price": 11,
       "category": "coffee",
       "imported": true
@@ -477,7 +558,7 @@
     },
     {
       "id": 6,
-      "name": "imported crate of Almond Snickers",
+      "name": "Imported crate of Almond Snickers",
       "price": 75.99,
       "category": "candy",
       "imported": true

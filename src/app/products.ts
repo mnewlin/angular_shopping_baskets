@@ -17,14 +17,14 @@ export const products: Product[] = [
   },
   {
     id: 3,
-    name: "bag of microwave Popcorn",
+    name: "Bag of microwave Popcorn",
     price: 0.99,
     category: "popcorn",
     imported: false
   },
   {
     id: 4,
-    name: "imported bag of Vanilla-Hazelnut Coffee",
+    name: "Imported bag of Vanilla-Hazelnut Coffee",
     price: 11,
     category: "coffee",
     imported: true
@@ -38,7 +38,7 @@ export const products: Product[] = [
   },
   {
     id: 6,
-    name: "imported crate of Almond Snickers",
+    name: "Imported crate of Almond Snickers",
     price: 75.99,
     category: "candy",
     imported: true

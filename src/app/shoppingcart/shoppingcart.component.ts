@@ -22,6 +22,7 @@ export class ShoppingcartComponent implements OnInit {
   selectedProduct: Product;
   selectedProductId: any;
   selectedQty: number;
+  unitPrice: any;
   selectedPrice: any;
   examptedCategories: String[] = ["candy", "popcorn", "coffee"];
   cartitems: Cart[] = [];
@@ -42,17 +43,20 @@ export class ShoppingcartComponent implements OnInit {
     this.store.select(fromRoot.getorders).subscribe(k => this.orderlist = k);
 
   }
-  ChnageProduct(): void {
+
+  ChangeProduct(): void {
     this.selectedProduct = this.products.find(p => p.id === Number(this.selectedProductId));
+    this.unitPrice =this.selectedProduct.price;
     if (this.selectedQty && this.selectedQty > 0) {
       this.selectedPrice = this.selectedQty * this.selectedProduct.price;
     } else {
       this.selectedPrice = this.selectedProduct.price;
     }
   }
+
   addProduct(): void {
     if (!this.selectedProductId) {
-      this.notifierService.notify("error", "Please select product!!");
+      this.notifierService.notify("error", "Please select product");
       return;
     }
     if (!this.selectedQty || this.selectedQty === 0) {
