@@ -1,6 +1,7 @@
 import { Product } from "./product";
 
 export class Cart {
+    id: symbol;
     product: Product;
     quantity: number;
     salesTax: number;

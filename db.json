@@ -2,7 +2,7 @@
   "orders": [
     {
       "invoiceNumber": 1,
-      "invoiceTo": "Developer",
+      "invoiceTo": "XYZ Corp",
       "cartItimes": [
         {
           "product": {
@@ -29,7 +29,7 @@
     },
     {
       "invoiceNumber": 2,
-      "invoiceTo": "Developer",
+      "invoiceTo": "XYZ Corp",
       "cartItimes": [
         {
           "product": {
@@ -71,7 +71,7 @@
     },
     {
       "invoiceNumber": 3,
-      "invoiceTo": "Developer",
+      "invoiceTo": "XYZ Corp",
       "cartItimes": [
         {
           "product": {
@@ -98,7 +98,7 @@
     },
     {
       "invoiceNumber": 4,
-      "invoiceTo": "Developer",
+      "invoiceTo": "XYZ Corp",
       "cartItimes": [
         {
           "product": {
@@ -125,7 +125,7 @@
     },
     {
       "invoiceNumber": 5,
-      "invoiceTo": "Developer",
+      "invoiceTo": "XYZ Corp",
       "cartItimes": [
         {
           "product": {
@@ -152,7 +152,7 @@
     },
     {
       "invoiceNumber": 6,
-      "invoiceTo": "Developer",
+      "invoiceTo": "XYZ Corp",
       "cartItimes": [
         {
           "product": {
@@ -194,7 +194,7 @@
     },
     {
       "invoiceNumber": 7,
-      "invoiceTo": "Developer",
+      "invoiceTo": "XYZ Corp",
       "cartItimes": [
         {
           "product": {
@@ -236,7 +236,7 @@
     },
     {
       "invoiceNumber": 8,
-      "invoiceTo": "Developer",
+      "invoiceTo": "XYZ Corp",
       "cartItimes": [
         {
           "product": {
@@ -263,7 +263,7 @@
     },
     {
       "invoiceNumber": 9,
-      "invoiceTo": "Developer",
+      "invoiceTo": "XYZ Corp",
       "cartItimes": [
         {
           "product": {
@@ -290,7 +290,7 @@
     },
     {
       "invoiceNumber": 10,
-      "invoiceTo": "Developer",
+      "invoiceTo": "XYZ Corp",
       "cartItimes": [
         {
           "product": {
@@ -317,7 +317,7 @@
     },
     {
       "invoiceNumber": 11,
-      "invoiceTo": "Developer",
+      "invoiceTo": "XYZ Corp",
       "cartItimes": [
         {
           "product": {
@@ -341,6 +341,102 @@
       "salesTax": 0,
       "subTotal": 80,
       "id": 11
+    },
+    {
+      "invoiceNumber": 12,
+      "invoiceTo": "John Smith",
+      "cartItimes": [
+        {
+          "product": {
+            "id": 2,
+            "name": "Walkman",
+            "price": 99.99,
+            "category": "electronic",
+            "imported": false
+          },
+          "quantity": 4,
+          "totalPrice": 399.96,
+          "salesTax": 40,
+          "salesTaxPer": 10,
+          "importTaxPer": 0,
+          "priceWithTax": 439.96
+        },
+        {
+          "product": {
+            "id": 2,
+            "name": "Walkman",
+            "price": 99.99,
+            "category": "electronic",
+            "imported": false
+          },
+          "quantity": 2,
+          "totalPrice": 199.98,
+          "salesTax": 20,
+          "salesTaxPer": 10,
+          "importTaxPer": 0,
+          "priceWithTax": 219.98
+        }
+      ],
+      "dueDate": "2019-10-28T17:48:40.614Z",
+      "invoiceDate": "2019-10-18T17:48:40.614Z",
+      "orderTotal": 659.94,
+      "salesTax": 60,
+      "subTotal": 599.94,
+      "id": 12
+    },
+    {
+      "invoiceNumber": 13,
+      "invoiceTo": "John Smith",
+      "cartItimes": [
+        {
+          "product": {
+            "id": 2,
+            "name": "Walkman",
+            "price": 99.99,
+            "category": "electronic",
+            "imported": false
+          },
+          "quantity": 1,
+          "totalPrice": 99.99,
+          "salesTax": 10,
+          "salesTaxPer": 10,
+          "importTaxPer": 0,
+          "priceWithTax": 109.99
+        }
+      ],
+      "dueDate": "2019-10-28T19:04:31.879Z",
+      "invoiceDate": "2019-10-18T19:04:31.879Z",
+      "orderTotal": 109.99,
+      "salesTax": 10,
+      "subTotal": 99.99,
+      "id": 13
+    },
+    {
+      "invoiceNumber": 14,
+      "invoiceTo": "John Smith",
+      "cartItimes": [
+        {
+          "product": {
+            "id": 4,
+            "name": "imported bag of Vanilla-Hazelnut Coffee",
+            "price": 11,
+            "category": "coffee",
+            "imported": true
+          },
+          "quantity": 1,
+          "totalPrice": 11,
+          "salesTax": 0.55,
+          "salesTaxPer": 0,
+          "importTaxPer": 5,
+          "priceWithTax": 11.55
+        }
+      ],
+      "dueDate": "2019-10-29T01:09:15.488Z",
+      "invoiceDate": "2019-10-19T01:09:15.488Z",
+      "orderTotal": 11.55,
+      "salesTax": 0.55,
+      "subTotal": 11,
+      "id": 14
     }
   ],
   "products": [

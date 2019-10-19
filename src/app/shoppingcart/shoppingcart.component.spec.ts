@@ -1,14 +1,12 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed, tick } from "@angular/core/testing";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { By } from "@angular/platform-browser";
-import { DebugElement } from "@angular/core";
-
 import { ShoppingcartComponent } from "./shoppingcart.component";
-import { FormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientModule } from '@angular/common/http';
-import { NotifierModule } from 'angular-notifier';
-import { ProductService } from '../shared/service/product.service';
+import { FormsModule } from "@angular/forms";
+import { RouterTestingModule } from "@angular/router/testing";
+import { HttpClientModule } from "@angular/common/http";
+import { NotifierModule } from "angular-notifier";
+import { ProductService } from "../shared/service/product.service";
 
 describe("ShoppingcartComponent", () => {
   let component: ShoppingcartComponent;
@@ -35,8 +33,9 @@ describe("ShoppingcartComponent", () => {
     expect(component).toBeTruthy();
   });
   it("should clicked add product", () => {
-    spyOn(component, 'addProduct');
-    let button = fixture.debugElement.nativeElement.querySelector('.addproduct');
+    spyOn(component, "addProduct");
+    // tslint:disable-next-line: typedef
+    let button = fixture.debugElement.nativeElement.querySelector(".addproduct");
     button.click();
 
     fixture.whenStable().then(() => {
@@ -44,30 +43,25 @@ describe("ShoppingcartComponent", () => {
     });
   });
 
-  it('should select product', async () => {
+  it("should select product", async () => {
     component.ngOnInit();
     fixture.whenStable().then(() => {
       expect(component.products.length).toBeGreaterThan(0);
-      let select = fixture.debugElement.query(By.css('.productSelect')).nativeElement as HTMLSelectElement;
+      // tslint:disable-next-line: typedef
+      let select = fixture.debugElement.query(By.css(".productSelect")).nativeElement as HTMLSelectElement;
       fixture.detectChanges();
       select.selectedIndex = 1;
-      select.dispatchEvent(new Event('change'));
+      select.dispatchEvent(new Event("change"));
       fixture.detectChanges();
-      let el = fixture.debugElement.query(By.css('.productprice')).nativeElement;
+      // tslint:disable-next-line: typedef
+      let el = fixture.debugElement.query(By.css(".productprice")).nativeElement;
       expect(el.innerHTML).toContain(component.selectedProduct.price);
-      let qtyTextbox = fixture.debugElement.query(By.css('.qtyTextbox')).nativeElement as HTMLInputElement;
+      // tslint:disable-next-line: typedef
+      let qtyTextbox = fixture.debugElement.query(By.css(".qtyTextbox")).nativeElement as HTMLInputElement;
       qtyTextbox.value = "2";
-      qtyTextbox.dispatchEvent(new Event('change'));
+      qtyTextbox.dispatchEvent(new Event("change"));
       fixture.detectChanges();
       expect(el.innerHTML).toContain(component.selectedProduct.price * 2);
-
-
-
-
     });
-
-
-
   });
-
 });

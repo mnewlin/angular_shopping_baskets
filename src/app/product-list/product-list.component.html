@@ -22,7 +22,7 @@
             <main>
                 <div class="row contacts">
                     <div class="col invoice-to">
-                        <div class="text-gray-light">Receipt TO:</div>
+                        <div class="text-gray-light">Receipt To:</div>
                         <h2 class="to">{{order?.invoiceTo}}</h2>
                         <div class="address">796 Silver Harbour, TX 79273, US</div>
                         <div class="email"><a href="mailto:john@example.com">john@example.com</a></div>
@@ -37,7 +37,7 @@
                 <table>
                     <thead style="font-weight: bold">
                         <tr>
-                            <th>Line No.</th>
+                            <th>LINE NO.</th>
                             <th class="text-left">DESCRIPTION</th>
                             <th class="text-right">QUANTITY</th>
 
@@ -65,7 +65,7 @@
                             <td class="qty">{{item?.salesTaxPer | number : '1.2-2'}}%</td>
                             <td class="qty">{{item?.importTaxPer | number : '1.2-2'}}%</td>
                             <td class="qty">${{item?.salesTax | number : '1.2-2'}}</td>
-                          
+
                             <td class="total">${{item.priceWithTax | number : '1.2-2'}}</td>
                         </tr>
 

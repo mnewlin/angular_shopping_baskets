@@ -1,8 +1,8 @@
 /* tslint:disable:no-unused-variable */
 
-import { TestBed, async, inject } from "@angular/core/testing";
+import { TestBed, inject } from "@angular/core/testing";
 import { ProductService } from "./product.service";
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from "@angular/common/http";
 
 describe("Service: Product", () => {
   beforeEach(() => {
@@ -15,7 +15,7 @@ describe("Service: Product", () => {
   it("should ...", inject([ProductService], (service: ProductService) => {
     expect(service).toBeTruthy();
   }));
-  it('should return an ProductList',
+  it("should return an ProductList",
     inject([ProductService], (productService) => {
 
       productService.getAllProducts().subscribe((products) => {

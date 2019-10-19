@@ -9,6 +9,12 @@ import { ProductListComponent } from "./product-list/product-list.component";
 import { HttpClientModule } from "@angular/common/http";
 import { ShoppingcartComponent } from "./shoppingcart/shoppingcart.component";
 import { NotifierModule } from "angular-notifier";
+import { StoreModule } from "@ngrx/store";
+import { reducers } from "./reducers";
+import { EffectsModule } from "@ngrx/effects";
+import { ProductEffects } from "./effects/product.effects";
+import { OrdersEffects } from "./effects/orders.effects";
+import { OrderEffects } from "./effects/order.effects";
 
 @NgModule({
   imports: [
@@ -35,7 +41,10 @@ import { NotifierModule } from "angular-notifier";
       { path: "orders", component: ProductListComponent },
       { path: "", component: ShoppingcartComponent }
     ]),
-    NgxPrintModule
+    NgxPrintModule,
+    StoreModule.forRoot(reducers),
+
+    EffectsModule.forRoot([ProductEffects,OrdersEffects,OrderEffects])
   ],
   declarations: [
     AppComponent,

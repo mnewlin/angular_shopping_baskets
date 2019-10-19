@@ -1,13 +1,16 @@
 import { Component, OnInit } from "@angular/core";
-import { ProductService } from "../shared/service/product.service";
 import { Product } from "../shared/models/product";
 import { NotifierService } from "angular-notifier";
 import { Cart } from "../shared/models/cart";
 import { Constants } from "../shared/Constants";
-import { OrderService } from "../shared/service/order.service";
 import { Order } from "../shared/models/order";
-import { Router } from '@angular/router';
-
+import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
+import * as fromRoot from "../reducers";
+import { GetProductList } from "../actions/product.actions";
+import { GetOrderList } from "../actions/orders.actions";
+import * as fromActions from "../actions/order.actions";
+import { ofType, Actions } from "@ngrx/effects";
 @Component({
   selector: "app-shoppingcart",
   templateUrl: "./shoppingcart.component.html",
@@ -26,12 +29,17 @@ export class ShoppingcartComponent implements OnInit {
   orderTotal: number;
   subTotal: number;
   orderlist: Order[] = [];
-  constructor(private router: Router, private productsevice: ProductService, private notifierService: NotifierService, private orderService: OrderService) {
+  constructor(private router: Router,
+    private _actions$: Actions,
+    public store: Store<fromRoot.IState>,
+    private notifierService: NotifierService) {
   }
 
   ngOnInit(): void {
-    this.productsevice.getAllProducts().subscribe(k => this.products = k);
-    this.orderService.getAllOrders().subscribe(o => this.orderlist = o);
+    this.store.dispatch(new GetProductList());
+    this.store.dispatch(new GetOrderList());
+    this.store.select(fromRoot.getProducts).subscribe(k => this.products = k);
+    this.store.select(fromRoot.getorders).subscribe(k => this.orderlist = k);
 
   }
   ChnageProduct(): void {
@@ -51,12 +59,9 @@ export class ShoppingcartComponent implements OnInit {
       this.notifierService.notify("error", "Please enter quantity");
       return;
     }
-    if (this.cartitems.some(p => p.product.id == this.selectedProductId)) {
-      this.notifierService.notify("error", "Product already in cart");
-      return;
-    }
 
     let cart: Cart = new Cart();
+    cart.id = Symbol();
     cart.product = this.selectedProduct;
     cart.quantity = this.selectedQty;
     cart.totalPrice = this.selectedPrice;
@@ -74,15 +79,15 @@ export class ShoppingcartComponent implements OnInit {
       element.salesTax = 0;
       element.totalPrice = Number(element.totalPrice.toFixed(2));
       if (!(this.examptedCategories.includes(element.product.category))) {
-        //element.salesTax = +(Math.ceil(((element.totalPrice * Constants.salesTax) / 100) * 20 - .05) /20).toFixed(2);
-        element.salesTax = +(this.multipleOfFive(element.totalPrice, Constants.salesTax))
+        // element.salesTax = +(Math.ceil(((element.totalPrice * Constants.salesTax) / 100) * 20 - .05) /20).toFixed(2);
+        element.salesTax = +(this.multipleOfFive(element.totalPrice, Constants.salesTax));
         element.salesTaxPer = Constants.salesTax;
 
 
       }
-      if ( element.product.imported) {
-        //element.salesTax += +(Math.ceil(((element.totalPrice * Constants.importDuty) / 100) * 20 - .05) / 20).toFixed(2);
-        element.salesTax += +(this.multipleOfFive (element.totalPrice, Constants.importDuty));
+      if (element.product.imported) {
+        // element.salesTax += +(Math.ceil(((element.totalPrice * Constants.importDuty) / 100) * 20 - .05) / 20).toFixed(2);
+        element.salesTax += +(this.multipleOfFive(element.totalPrice, Constants.importDuty));
         element.salesTax = +element.salesTax.toFixed(2);
         element.importTaxPer = Constants.importDuty;
       }
@@ -95,12 +100,13 @@ export class ShoppingcartComponent implements OnInit {
     return cartitem;
   }
 
+  // tslint:disable-next-line: typedef
   multipleOfFive(price, tax) {
     return (Math.ceil(((price * tax) / 100) * 20 - .05) / 20).toFixed(2);
   }
 
   updateQty(item: Cart, event: any): void {
-    let cartItme: Cart = this.cartitems.find(i => i.product.id === item.product.id);
+    let cartItme: Cart = this.cartitems.find(i => i.id === item.id);
     cartItme.quantity = +event.srcElement.value;
     cartItme.totalPrice = cartItme.product.price * cartItme.quantity;
     this.cartitems = this.calculateTax(this.cartitems);
@@ -120,19 +126,28 @@ export class ShoppingcartComponent implements OnInit {
       order.orderTotal = this.orderTotal;
       order.salesTax = this.salesTax;
       order.subTotal = this.subTotal;
-      this.orderService.createOrder(order).subscribe(d => {
-        this.cartitems = [];
-        this.orderTotal = null;
-        this.salesTax = null;
-        this.subTotal = null;
-        this.notifierService.notify("success", "Order placed successfully");
-        this.router.navigate(['/orders'], { queryParams: { id: d.invoiceNumber } });
-      });
+      this.createOrder(order);
+      // this.orderService.createOrder(order).subscribe(d => {
+
+      // });
     }
 
   }
   addDays(date: Date, days: number): Date {
     date.setDate(date.getDate() + days);
     return date;
+  }
+  createOrder(order: Order): void {
+    this.store.dispatch(new fromActions.AddOrderAction(order));
+    this._actions$.pipe(ofType(fromActions.ActionTypes.AddOrderSuccess)).subscribe((data: any) => {
+      this.cartitems = [];
+      this.orderTotal = null;
+      this.salesTax = null;
+      this.subTotal = null;
+      this.notifierService.notify("success", "Order placed successfully");
+      this.router.navigate(["/orders"], { queryParams: { id: data.payload.invoiceNumber } });
+    });
+
+
   }
 }
